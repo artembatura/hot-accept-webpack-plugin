@@ -1,6 +1,6 @@
 {
   "name": "hot-accept-webpack-plugin",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Webpack Plugin, which adds HMR accepting code to module(s)",
   "author": {
     "name": "Artem Batura",
