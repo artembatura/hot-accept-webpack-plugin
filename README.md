@@ -46,7 +46,7 @@ module.exports = {
 
 ### `test`
 
-Type: `RegExp | RegExp[]`
+Type: `string | RegExp | (string | RegExp)[]`
 
 Default: `undefined`
 
