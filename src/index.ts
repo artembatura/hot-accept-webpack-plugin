@@ -10,7 +10,8 @@ export class HotAcceptPlugin extends ModifyModuleSourcePlugin {
       [].concat(test as never[]).map(test => ({
         test:
           typeof test === 'string'
-            ? (module: any) => module.userRequest.endsWith(test)
+            ? (module: any) =>
+                module.userRequest && module.userRequest.endsWith(test)
             : test,
         modify: (src: string) =>
           src + 'if (module.hot) { module.hot.accept(); }',
