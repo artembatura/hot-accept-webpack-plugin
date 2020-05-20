@@ -1,8 +1,6 @@
 # hot-accept-webpack-plugin
 
-Webpack Plugin, which adds HMR accepting code to module(s)
-
-This plugin is inherit from [`modify-source-webpack-plugin`](https://github.com/artemirq/modify-source-webpack-plugin)
+Adds HMR accepting code to need modules. Based on [modify-source-webpack-plugin](https://github.com/artemirq/modify-source-webpack-plugin)
 
 ## Installation
 
@@ -38,7 +36,7 @@ const { HotAcceptPlugin } = require('hot-accept-webpack-plugin');
 
 ```js
 module.exports = {
-  plugins: [new HotAcceptPlugin(options)]
+  plugins: [new HotAcceptPlugin(options)],
 };
 ```
 
@@ -60,8 +58,8 @@ Default: `undefined`
 module.exports = {
   plugins: [
     new HotAcceptPlugin({
-      test: /index\.js/
-    })
-  ]
+      test: /index\.js/,
+    }),
+  ],
 };
 ```

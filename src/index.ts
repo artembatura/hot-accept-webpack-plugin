@@ -7,7 +7,7 @@ export type Options = {
 export class HotAcceptPlugin extends ModifyModuleSourcePlugin {
   constructor({ test }: Options) {
     super(
-      [].concat(test as never[]).map(test => ({
+      [].concat(test as never[]).map((test) => ({
         test:
           typeof test === 'string'
             ? (module: any) =>
@@ -15,7 +15,7 @@ export class HotAcceptPlugin extends ModifyModuleSourcePlugin {
             : test,
         modify: (src: string) =>
           src + 'if (module.hot) { module.hot.accept(); }',
-        findFirst: true
+        findFirst: true,
       }))
     );
   }
