@@ -3,9 +3,18 @@
 node_modules
 npm-debug.log
 yarn-error.log
+*.tsbuildinfo
+
+.yarn/*
+!.yarn/cache
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
 
 /.changelog
 
 build
 
 .env
+.eslintcache

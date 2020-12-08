@@ -1,6 +1,15 @@
 # hot-accept-webpack-plugin
 
-Adds HMR accepting code to need modules. Based on [modify-source-webpack-plugin](https://github.com/artemirq/modify-source-webpack-plugin)
+Adds HMR accepting code to need modules.
+
+This plugin is based on [modify-source-webpack-plugin](https://github.com/artemirq/modify-source-webpack-plugin).
+
+## Compatibility
+
+| Webpack Version | Plugin version | Status                   | Branch                                                                      |
+| --------------- | -------------- | ------------------------ | --------------------------------------------------------------------------- |
+| ^5.0.0          | ^2.0.0         | <p align="center">✅</p> | [master](https://github.com/artemirq/hot-accept-webpack-plugin/tree/master) |
+| ^4.37.0         | ^1.2.0         | <p align="center">✅</p> | [1.x](https://github.com/artemirq/hot-accept-webpack-plugin/tree/1.x)       |
 
 ## Installation
 
@@ -36,7 +45,7 @@ const { HotAcceptPlugin } = require('hot-accept-webpack-plugin');
 
 ```js
 module.exports = {
-  plugins: [new HotAcceptPlugin(options)],
+  plugins: [new HotAcceptPlugin(options)]
 };
 ```
 
@@ -46,20 +55,76 @@ module.exports = {
 
 Type: `string | RegExp | (string | RegExp)[]`
 
-Default: `undefined`
-
 `Required`
 
-#### Example
+#### Example (with RegExp)
+
+In this example plugin will add `module.hot.accept` to all modules with filename `index.js`.
 
 **webpack.config.js**
 
 ```js
+const { HotModuleReplacementPlugin } = require('webpack');
+const { HotAcceptPlugin } = require('hot-accept-webpack-plugin');
+
 module.exports = {
   plugins: [
+    new HotModuleReplacementPlugin(),
     new HotAcceptPlugin({
-      test: /index\.js/,
-    }),
-  ],
+      test: /index\.js$/
+    })
+  ]
 };
 ```
+
+If you want to add `module.hot.accept` only to one specific file, you need declare more precise path to file. You can check next example.
+
+#### Example (specific file)
+
+For example, we have following file structure
+
+```
+src/index.js
+src/components/TodoList.js
+src/components/index.js
+```
+
+If we want to add `module.hot.accept` only to `src/index.js`, we should use following RegExp: `/src\/index\.js$/`.
+
+**webpack.config.js**
+
+```js
+const { HotModuleReplacementPlugin } = require('webpack');
+const { HotAcceptPlugin } = require('hot-accept-webpack-plugin');
+
+module.exports = {
+  plugins: [
+    new HotModuleReplacementPlugin(),
+    new HotAcceptPlugin({
+      test: /src\/index\.js$/
+    })
+  ]
+};
+```
+
+#### Example (with string)
+
+**webpack.config.js**
+
+```js
+const { HotModuleReplacementPlugin } = require('webpack');
+const { HotAcceptPlugin } = require('hot-accept-webpack-plugin');
+
+module.exports = {
+  plugins: [
+    new HotModuleReplacementPlugin(),
+    new HotAcceptPlugin({
+      test: 'index.js'
+    })
+  ]
+};
+```
+
+## Options array
+
+TODO: add docs and tests
