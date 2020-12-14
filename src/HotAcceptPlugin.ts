@@ -1,9 +1,17 @@
 import { ModifyModuleSourcePlugin, Option } from 'modify-source-webpack-plugin';
-import type { NormalModule } from 'webpack';
+import type { compilation } from 'webpack';
 
 export type Options = {
   test: string | RegExp | (string | RegExp)[];
 };
+
+interface NormalModule extends compilation.Module {
+  request?: string;
+  loaders?: Array<{
+    loader: string;
+    options?: any;
+  }>;
+}
 
 export class HotAcceptPlugin extends ModifyModuleSourcePlugin {
   constructor(options: Options) {
