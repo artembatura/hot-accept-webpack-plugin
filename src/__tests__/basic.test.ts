@@ -6,7 +6,7 @@ import webpack, { Configuration, HotModuleReplacementPlugin } from 'webpack';
 import { HotAcceptPlugin } from '../HotAcceptPlugin';
 import DoneCallback = jest.DoneCallback;
 
-const OUTPUT_PATH = path.resolve(__dirname, '../build/basic-test');
+const OUTPUT_PATH = path.resolve(__dirname, './build/basic-test');
 const OUTPUT_BUNDLE = 'bundle.js';
 
 function testPlugin(
