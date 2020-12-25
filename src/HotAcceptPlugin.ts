@@ -8,10 +8,12 @@ export type Options = {
 
 function createRule(test: string | RegExp, modify: Rule['modify']): Rule {
   if (typeof test === 'string') {
+    const testString = test.replace(/\\/g, '/');
+
     const testFn = (module: NormalModule) => {
       const moduleRequest = module.userRequest?.replace(/\\/g, '/');
 
-      return moduleRequest ? moduleRequest.endsWith(test) : false;
+      return moduleRequest ? moduleRequest.endsWith(testString) : false;
     };
 
     return {
