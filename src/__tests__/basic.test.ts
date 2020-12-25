@@ -6,7 +6,7 @@ import webpack, { Configuration, HotModuleReplacementPlugin } from 'webpack';
 import { HotAcceptPlugin } from '../HotAcceptPlugin';
 import DoneCallback = jest.DoneCallback;
 
-const OUTPUT_PATH = path.resolve(__dirname, '../build/basic-test');
+const OUTPUT_PATH = path.resolve(__dirname, './build/basic-test');
 const OUTPUT_BUNDLE = 'bundle.js';
 
 function testPlugin(
@@ -107,7 +107,7 @@ function getModulePath(fileName: string): string {
   return path.join(__dirname, `fixtures/${fileName}`);
 }
 
-const modifyModuleSrc = (src: string) =>
+const modify = (src: string) =>
   src + 'if (module.hot) { module.hot.accept(); }';
 
 describe('HotAcceptPlugin', () => {
@@ -115,7 +115,7 @@ describe('HotAcceptPlugin', () => {
     rimraf(OUTPUT_PATH, done);
   });
 
-  it('modifies first module by regexp', done => {
+  it('modifies index.js by regexp', done => {
     testPlugin(
       {
         mode: 'development',
@@ -136,7 +136,7 @@ describe('HotAcceptPlugin', () => {
         {
           module: 'index.js',
           shouldContain: [[/if \(module.hot\) { module.hot.accept\(\); }/g, 1]],
-          shouldEqual: modifyModuleSrc(
+          shouldEqual: modify(
             fs.readFileSync(getModulePath('index.js')).toString()
           )
         },
@@ -159,7 +159,7 @@ describe('HotAcceptPlugin', () => {
     );
   });
 
-  it('modifies only one-module.js by regexp', done => {
+  it('modifies one-module.js by regexp', done => {
     testPlugin(
       {
         mode: 'development',
@@ -185,7 +185,7 @@ describe('HotAcceptPlugin', () => {
         {
           module: 'one-module.js',
           shouldContain: [[/if \(module.hot\) { module.hot.accept\(\); }/g, 1]],
-          shouldEqual: modifyModuleSrc(
+          shouldEqual: modify(
             fs.readFileSync(getModulePath('one-module.js')).toString()
           )
         },
@@ -201,49 +201,7 @@ describe('HotAcceptPlugin', () => {
     );
   });
 
-  it('modifies only two-module.js by regexp', done => {
-    testPlugin(
-      {
-        mode: 'development',
-        entry: path.join(__dirname, 'fixtures/index.js'),
-        output: {
-          path: OUTPUT_PATH,
-          filename: OUTPUT_BUNDLE
-        },
-        plugins: [
-          new HotModuleReplacementPlugin(),
-          new HotAcceptPlugin({
-            test: /two-module\.js$/
-          })
-        ]
-      },
-      done,
-      [
-        {
-          module: 'index.js',
-          shouldContain: [[/if \(module.hot\) { module.hot.accept\(\); }/g, 0]],
-          shouldEqual: fs.readFileSync(getModulePath('index.js')).toString()
-        },
-        {
-          module: 'one-module.js',
-          shouldContain: [[/if \(module.hot\) { module.hot.accept\(\); }/g, 0]],
-          shouldEqual: fs
-            .readFileSync(getModulePath('one-module.js'))
-            .toString()
-        },
-        {
-          module: 'two-module.js',
-          shouldContain: [[/if \(module.hot\) { module.hot.accept\(\); }/g, 1]],
-          shouldEqual: modifyModuleSrc(
-            fs.readFileSync(getModulePath('two-module.js')).toString()
-          )
-        }
-      ],
-      [[/if \(true\) { module.hot.accept\(\); }/g, 1]]
-    );
-  });
-
-  it('modifies first module by string', done => {
+  it('modifies index.js by string', done => {
     testPlugin(
       {
         mode: 'development',
@@ -264,7 +222,7 @@ describe('HotAcceptPlugin', () => {
         {
           module: 'index.js',
           shouldContain: [[/if \(module.hot\) { module.hot.accept\(\); }/g, 1]],
-          shouldEqual: modifyModuleSrc(
+          shouldEqual: modify(
             fs.readFileSync(getModulePath('index.js')).toString()
           )
         },
@@ -308,21 +266,111 @@ describe('HotAcceptPlugin', () => {
         {
           module: 'index.js',
           shouldContain: [[/if \(module.hot\) { module.hot.accept\(\); }/g, 1]],
-          shouldEqual: modifyModuleSrc(
+          shouldEqual: modify(
             fs.readFileSync(getModulePath('index.js')).toString()
           )
         },
         {
           module: 'one-module.js',
           shouldContain: [[/if \(module.hot\) { module.hot.accept\(\); }/g, 1]],
-          shouldEqual: modifyModuleSrc(
+          shouldEqual: modify(
             fs.readFileSync(getModulePath('one-module.js')).toString()
           )
         },
         {
           module: 'two-module.js',
           shouldContain: [[/if \(module.hot\) { module.hot.accept\(\); }/g, 1]],
-          shouldEqual: modifyModuleSrc(
+          shouldEqual: modify(
+            fs.readFileSync(getModulePath('two-module.js')).toString()
+          )
+        }
+      ],
+      [[/if \(true\) { module.hot.accept\(\); }/g, 3]]
+    );
+  });
+
+  it('modifies one-module.js file by regexp path', done => {
+    testPlugin(
+      {
+        mode: 'development',
+        entry: path.join(__dirname, 'fixtures/index.js'),
+        output: {
+          path: OUTPUT_PATH,
+          filename: OUTPUT_BUNDLE
+        },
+        plugins: [
+          new HotModuleReplacementPlugin(),
+          new HotAcceptPlugin({
+            test: /fixtures\/one-module\.js$/
+          })
+        ]
+      },
+      done,
+      [
+        {
+          module: 'index.js',
+          shouldContain: [[/if \(module.hot\) { module.hot.accept\(\); }/g, 0]],
+          shouldEqual: fs.readFileSync(getModulePath('index.js')).toString()
+        },
+        {
+          module: 'one-module.js',
+          shouldContain: [[/if \(module.hot\) { module.hot.accept\(\); }/g, 1]],
+          shouldEqual: modify(
+            fs.readFileSync(getModulePath('one-module.js')).toString()
+          )
+        },
+        {
+          module: 'two-module.js',
+          shouldContain: [[/if \(module.hot\) { module.hot.accept\(\); }/g, 0]],
+          shouldEqual: fs
+            .readFileSync(getModulePath('two-module.js'))
+            .toString()
+        }
+      ],
+      [[/if \(true\) { module.hot.accept\(\); }/g, 1]]
+    );
+  });
+
+  it('modifies multiple files by array as test', done => {
+    testPlugin(
+      {
+        mode: 'development',
+        entry: path.join(__dirname, 'fixtures/index.js'),
+        output: {
+          path: OUTPUT_PATH,
+          filename: OUTPUT_BUNDLE
+        },
+        plugins: [
+          new HotModuleReplacementPlugin(),
+          new HotAcceptPlugin({
+            test: [
+              'index.js',
+              /fixtures\/two-module\.js$/,
+              'fixtures/one-module.js'
+            ]
+          })
+        ]
+      },
+      done,
+      [
+        {
+          module: 'index.js',
+          shouldContain: [[/if \(module.hot\) { module.hot.accept\(\); }/g, 1]],
+          shouldEqual: modify(
+            fs.readFileSync(getModulePath('index.js')).toString()
+          )
+        },
+        {
+          module: 'one-module.js',
+          shouldContain: [[/if \(module.hot\) { module.hot.accept\(\); }/g, 1]],
+          shouldEqual: modify(
+            fs.readFileSync(getModulePath('one-module.js')).toString()
+          )
+        },
+        {
+          module: 'two-module.js',
+          shouldContain: [[/if \(module.hot\) { module.hot.accept\(\); }/g, 1]],
+          shouldEqual: modify(
             fs.readFileSync(getModulePath('two-module.js')).toString()
           )
         }
