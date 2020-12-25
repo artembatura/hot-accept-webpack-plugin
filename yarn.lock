@@ -3304,7 +3304,7 @@ fsevents@^2.1.2:
     husky: ^4.3.5
     jest: ^26.6.3
     lint-staged: ^10.5.3
-    modify-source-webpack-plugin: 2.0.0-beta.3
+    modify-source-webpack-plugin: 2.0.0-beta.7
     npm-run-all: ^4.1.5
     prettier: ^2.2.1
     rimraf: ^3.0.2
@@ -4845,15 +4845,15 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"modify-source-webpack-plugin@npm:2.0.0-beta.3":
-  version: 2.0.0-beta.3
-  resolution: "modify-source-webpack-plugin@npm:2.0.0-beta.3"
+"modify-source-webpack-plugin@npm:2.0.0-beta.7":
+  version: 2.0.0-beta.7
+  resolution: "modify-source-webpack-plugin@npm:2.0.0-beta.7"
   dependencies:
     loader-utils: ^2.0.0
     schema-utils: ^3.0.0
   peerDependencies:
-    webpack: ^4.37.0 || ^5.0.0
-  checksum: 3cd90588dd881ad5aec7078b0ee13eb0e2172183044fcf82756488e77bfd2468056cf760fc6641e7a7da8bc65ecd46a2f7323bac55720e2f42bf8eac5b2f3b99
+    webpack: ^5.0.0
+  checksum: 2b53aee73dea15066ba8570d184159cb7b9e653f9bfa6df7b6d575054e4b775dec47a8f361b17b2230815f2e12f93036b499e3a8fec1e427e00ff4e71a255186
   languageName: node
   linkType: hard
 
