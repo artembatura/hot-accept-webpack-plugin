@@ -1,6 +1,6 @@
 {
   "name": "hot-accept-webpack-plugin",
-  "version": "1.2.0-beta.3",
+  "version": "1.2.0-beta.4",
   "description": "Adds HMR accepting code to your modules",
   "author": {
     "name": "Artem Batura",
@@ -28,7 +28,7 @@
     "watch": "tsc -b . --watch"
   },
   "dependencies": {
-    "modify-source-webpack-plugin": "1.1.0-beta.2"
+    "modify-source-webpack-plugin": "1.1.0-beta.3"
   },
   "devDependencies": {
     "@types/jest": "^26.0.15",

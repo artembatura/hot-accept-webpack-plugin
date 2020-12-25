@@ -53,7 +53,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["husky", "npm:4.3.5"],
             ["jest", "npm:26.6.3"],
             ["lint-staged", "npm:10.5.3"],
-            ["modify-source-webpack-plugin", "virtual:4f448709fad251c230164111ab38b512a1353f92f11d79b93e8c3d6a5b7b7f915df67d8519f0ad4002fb4281f4353def5124d567cc2195e6dc69f38560909525#npm:1.1.0-beta.2"],
+            ["modify-source-webpack-plugin", "virtual:4f448709fad251c230164111ab38b512a1353f92f11d79b93e8c3d6a5b7b7f915df67d8519f0ad4002fb4281f4353def5124d567cc2195e6dc69f38560909525#npm:1.1.0-beta.3"],
             ["npm-run-all", "npm:4.1.5"],
             ["prettier", "npm:2.2.1"],
             ["rimraf", "npm:3.0.2"],
@@ -4677,7 +4677,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["husky", "npm:4.3.5"],
             ["jest", "npm:26.6.3"],
             ["lint-staged", "npm:10.5.3"],
-            ["modify-source-webpack-plugin", "virtual:4f448709fad251c230164111ab38b512a1353f92f11d79b93e8c3d6a5b7b7f915df67d8519f0ad4002fb4281f4353def5124d567cc2195e6dc69f38560909525#npm:1.1.0-beta.2"],
+            ["modify-source-webpack-plugin", "virtual:4f448709fad251c230164111ab38b512a1353f92f11d79b93e8c3d6a5b7b7f915df67d8519f0ad4002fb4281f4353def5124d567cc2195e6dc69f38560909525#npm:1.1.0-beta.3"],
             ["npm-run-all", "npm:4.1.5"],
             ["prettier", "npm:2.2.1"],
             ["rimraf", "npm:3.0.2"],
@@ -6595,17 +6595,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["modify-source-webpack-plugin", [
-        ["npm:1.1.0-beta.2", {
-          "packageLocation": "./.yarn/cache/modify-source-webpack-plugin-npm-1.1.0-beta.2-08fcd7cfc1-321614d6c6.zip/node_modules/modify-source-webpack-plugin/",
+        ["npm:1.1.0-beta.3", {
+          "packageLocation": "./.yarn/cache/modify-source-webpack-plugin-npm-1.1.0-beta.3-7fd3fd48a5-63d3582619.zip/node_modules/modify-source-webpack-plugin/",
           "packageDependencies": [
-            ["modify-source-webpack-plugin", "npm:1.1.0-beta.2"]
+            ["modify-source-webpack-plugin", "npm:1.1.0-beta.3"]
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:4f448709fad251c230164111ab38b512a1353f92f11d79b93e8c3d6a5b7b7f915df67d8519f0ad4002fb4281f4353def5124d567cc2195e6dc69f38560909525#npm:1.1.0-beta.2", {
-          "packageLocation": "./.yarn/$$virtual/modify-source-webpack-plugin-virtual-4f78b60fe3/0/cache/modify-source-webpack-plugin-npm-1.1.0-beta.2-08fcd7cfc1-321614d6c6.zip/node_modules/modify-source-webpack-plugin/",
+        ["virtual:4f448709fad251c230164111ab38b512a1353f92f11d79b93e8c3d6a5b7b7f915df67d8519f0ad4002fb4281f4353def5124d567cc2195e6dc69f38560909525#npm:1.1.0-beta.3", {
+          "packageLocation": "./.yarn/$$virtual/modify-source-webpack-plugin-virtual-1ebe9725f1/0/cache/modify-source-webpack-plugin-npm-1.1.0-beta.3-7fd3fd48a5-63d3582619.zip/node_modules/modify-source-webpack-plugin/",
           "packageDependencies": [
-            ["modify-source-webpack-plugin", "virtual:4f448709fad251c230164111ab38b512a1353f92f11d79b93e8c3d6a5b7b7f915df67d8519f0ad4002fb4281f4353def5124d567cc2195e6dc69f38560909525#npm:1.1.0-beta.2"],
+            ["modify-source-webpack-plugin", "virtual:4f448709fad251c230164111ab38b512a1353f92f11d79b93e8c3d6a5b7b7f915df67d8519f0ad4002fb4281f4353def5124d567cc2195e6dc69f38560909525#npm:1.1.0-beta.3"],
             ["@types/webpack", "npm:4.41.25"],
             ["loader-utils", "npm:2.0.0"],
             ["schema-utils", "npm:3.0.0"],
