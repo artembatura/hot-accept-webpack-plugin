@@ -125,6 +125,20 @@ module.exports = {
 };
 ```
 
-## Options array
+#### Example (with test as array)
 
-TODO: add docs and tests
+**webpack.config.js**
+
+```js
+const { HotModuleReplacementPlugin } = require('webpack');
+const { HotAcceptPlugin } = require('hot-accept-webpack-plugin');
+
+module.exports = {
+  plugins: [
+    new HotModuleReplacementPlugin(),
+    new HotAcceptPlugin({
+      test: ['one-module.js', /two-module.js$/]
+    })
+  ]
+};
+```

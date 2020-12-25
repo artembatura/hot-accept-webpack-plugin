@@ -19,11 +19,9 @@ interface NormalModule extends compilation.Module {
 function createRule(test: string | RegExp, modify: Rule['modify']): Rule {
   if (typeof test === 'string') {
     const testFn = (module: NormalModule) => {
-      if (module.userRequest) {
-        return module.userRequest.endsWith(test);
-      }
+      const moduleRequest = module.userRequest?.replace(/\\/g, '/');
 
-      return false;
+      return moduleRequest ? moduleRequest.endsWith(test) : false;
     };
 
     return {
