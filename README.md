@@ -6,12 +6,12 @@ This plugin is based on [modify-source-webpack-plugin](https://github.com/artemi
 
 ## Compatibility
 
-| Webpack Version | Plugin version | Status                   | Branch                                                                      |
-| --------------- | -------------- | ------------------------ | --------------------------------------------------------------------------- |
-| ^5.0.0          | ^2.0.0         | <p align="center">✅</p> | [master](https://github.com/artemirq/hot-accept-webpack-plugin/tree/master) |
-| ^4.37.0         | ^1.2.0         | <p align="center">✅</p> | [1.x](https://github.com/artemirq/hot-accept-webpack-plugin/tree/1.x)       |
+| Webpack Version | Plugin version | Status                   |
+| --------------- | -------------- | ------------------------ |
+| ^5.0.0          | ^3.0.0         | <p align="center">✅</p> |
+| ^4.37.0         | ^3.0.0         | <p align="center">✅</p> |
 
-## Installation (webpack 5)
+## Installation
 
 ### NPM
 
@@ -23,20 +23,6 @@ npm i -D hot-accept-webpack-plugin@next
 
 ```
 yarn add -D hot-accept-webpack-plugin@next
-```
-
-## Installation (webpack 4)
-
-### NPM
-
-```
-npm i -D hot-accept-webpack-plugin
-```
-
-### Yarn
-
-```
-yarn add -D hot-accept-webpack-plugin
 ```
 
 ## Import

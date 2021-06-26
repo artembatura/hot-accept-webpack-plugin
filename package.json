@@ -1,6 +1,6 @@
 {
   "name": "hot-accept-webpack-plugin",
-  "version": "2.0.0-beta.7",
+  "version": "3.0.0-rc.0",
   "description": "Adds HMR accepting code to need modules",
   "author": {
     "name": "Artem Batura",
@@ -28,12 +28,13 @@
     "watch": "tsc -b . --watch"
   },
   "dependencies": {
-    "modify-source-webpack-plugin": "2.0.0-beta.7"
+    "modify-source-webpack-plugin": "3.0.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.15",
     "@types/node": "^14.14.10",
     "@types/rimraf": "^3.0.0",
+    "@types/webpack4": "npm:@types/webpack@5.28.0",
     "@typescript-eslint/eslint-plugin": "^4.9.1",
     "@typescript-eslint/parser": "^4.9.1",
     "eslint": "^7.15.0",
@@ -51,10 +52,11 @@
     "rimraf": "^3.0.2",
     "ts-jest": "^26.4.4",
     "typescript": "^4.1.2",
-    "webpack": "^5.10.0"
+    "webpack": "^5.15.0",
+    "webpack4": "npm:webpack@4.46.0"
   },
   "peerDependencies": {
-    "webpack": "^5.0.0"
+    "webpack": "^4.37.0 || ^5.0.0"
   },
   "husky": {
     "hooks": {
@@ -74,6 +76,8 @@
     "plugin",
     "hmr",
     "hot",
+    "module",
+    "reload",
     "accept"
   ]
 }
