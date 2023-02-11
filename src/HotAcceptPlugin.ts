@@ -1,12 +1,20 @@
-import { ModifySourcePlugin, Rule } from 'modify-source-webpack-plugin';
-import { NormalModule } from 'webpack';
+import {
+  ModifySourcePlugin,
+  Rule,
+  ConcatOperation,
+  AbstractOperation
+} from 'modify-source-webpack-plugin';
+import type { NormalModule } from 'webpack';
 
 export type Options = {
   test: string | RegExp | (string | RegExp)[];
   debug?: boolean;
 };
 
-function createRule(test: string | RegExp, modify: Rule['modify']): Rule {
+function createRule(
+  test: string | RegExp,
+  operations: AbstractOperation[]
+): Rule {
   if (typeof test === 'string') {
     const testString = test.replace(/\\/g, '/');
 
@@ -18,28 +26,29 @@ function createRule(test: string | RegExp, modify: Rule['modify']): Rule {
 
     return {
       test: testFn,
-      modify
+      operations
     };
   }
 
   return {
     test,
-    modify
+    operations
   };
 }
 
 export class HotAcceptPlugin extends ModifySourcePlugin {
   constructor(options: Options) {
-    const modify = (src: string) =>
-      src + 'if (module.hot) { module.hot.accept(); }';
+    const operations = [
+      new ConcatOperation('end', 'if (module.hot) { module.hot.accept(); }')
+    ];
 
-    const parentOptions = {
-      rules: Array.isArray(options.test)
-        ? options.test.map(test => createRule(test, modify))
-        : [createRule(options.test, modify)],
+    const rules = Array.isArray(options.test)
+      ? options.test.map(test => createRule(test, operations))
+      : [createRule(options.test, operations)];
+
+    super({
+      rules,
       debug: options.debug
-    };
-
-    super(parentOptions);
+    });
   }
 }

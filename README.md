@@ -2,14 +2,12 @@
 
 Adds HMR accepting code to need modules.
 
-This plugin is based on [modify-source-webpack-plugin](https://github.com/artemirq/modify-source-webpack-plugin).
-
 ## Compatibility
 
 | Webpack Version | Plugin version | Status                   |
 | --------------- | -------------- | ------------------------ |
-| ^5.0.0          | ^3.0.0         | <p align="center">✅</p> |
-| ^4.37.0         | ^3.0.0         | <p align="center">✅</p> |
+| ^5.0.0          | ^4.0.0         | <p align="center">✅</p> |
+| ^4.37.0         | ^4.0.0         | <p align="center">✅</p> |
 
 ## Installation
 
@@ -141,3 +139,5 @@ module.exports = {
   ]
 };
 ```
+
+This plugin is based on [modify-source-webpack-plugin](https://github.com/artemirq/modify-source-webpack-plugin).
