@@ -6,7 +6,7 @@
     "rootDir": "src",
     "outDir": "build",
     "moduleResolution": "node",
-    "target": "ES2018",
+    "lib": ["ESNext"],
     "module": "CommonJS",
     "strict": true,
     "esModuleInterop": true,
