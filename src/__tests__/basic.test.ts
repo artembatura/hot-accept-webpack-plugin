@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import rimraf from 'rimraf';
-import webpack, { Configuration, HotModuleReplacementPlugin } from 'webpack';
+import webpackV5, { Stats } from 'webpack';
+import webpackV4 from 'webpack-v4';
 
 import { HotAcceptPlugin } from '../HotAcceptPlugin';
 import DoneCallback = jest.DoneCallback;
@@ -10,7 +11,8 @@ const OUTPUT_PATH = path.resolve(__dirname, './build/basic-test');
 const OUTPUT_BUNDLE = 'bundle.js';
 
 function testPlugin(
-  webpackConfig: Configuration,
+  webpack: any,
+  webpackConfig: any,
   done: DoneCallback,
   expectModulesContent: Array<{
     module: string;
@@ -21,7 +23,7 @@ function testPlugin(
   expectErrors?: boolean,
   expectWarnings?: boolean
 ): void {
-  webpack(webpackConfig, (err, stats) => {
+  webpack(webpackConfig, (err: Record<string, any> | false, stats: Stats) => {
     expect(err).toBeFalsy();
 
     const compilationErrors = (stats?.compilation.errors || []).join('\n');
@@ -51,7 +53,11 @@ function testPlugin(
 
       expect(moduleMeta).toBeTruthy();
 
-      const moduleSource = moduleMeta?.originalSource().source().toString();
+      const originalSource = moduleMeta?.originalSource();
+
+      const moduleSource = originalSource
+        ? originalSource.source().toString()
+        : undefined;
 
       if (shouldEqual) {
         expect(moduleSource).toEqual(shouldEqual);
@@ -71,6 +77,14 @@ function testPlugin(
         expect(moduleSource).toContain(containItem);
       });
     });
+
+    const bundleExists = fs.existsSync(OUTPUT_PATH + '/' + OUTPUT_BUNDLE);
+
+    expect(bundleExists).toBe(true);
+
+    if (!bundleExists) {
+      return done();
+    }
 
     const bundleContent = fs
       .readFileSync(OUTPUT_PATH + '/' + OUTPUT_BUNDLE)
@@ -110,13 +124,14 @@ function getModulePath(fileName: string): string {
 const modify = (src: string) =>
   src + 'if (module.hot) { module.hot.accept(); }';
 
-describe('HotAcceptPlugin', () => {
+function runTests(webpack: typeof webpackV4 | typeof webpackV5) {
   beforeEach(done => {
     rimraf(OUTPUT_PATH, done);
   });
 
   it('modifies index.js by regexp', done => {
     testPlugin(
+      webpack,
       {
         mode: 'development',
         entry: path.join(__dirname, 'fixtures/index.js'),
@@ -125,7 +140,7 @@ describe('HotAcceptPlugin', () => {
           filename: OUTPUT_BUNDLE
         },
         plugins: [
-          new HotModuleReplacementPlugin(),
+          new webpack.HotModuleReplacementPlugin(),
           new HotAcceptPlugin({
             test: /index\.js$/
           })
@@ -161,6 +176,7 @@ describe('HotAcceptPlugin', () => {
 
   it('modifies one-module.js by regexp', done => {
     testPlugin(
+      webpack,
       {
         mode: 'development',
         entry: path.join(__dirname, 'fixtures/index.js'),
@@ -169,7 +185,7 @@ describe('HotAcceptPlugin', () => {
           filename: OUTPUT_BUNDLE
         },
         plugins: [
-          new HotModuleReplacementPlugin(),
+          new webpack.HotModuleReplacementPlugin(),
           new HotAcceptPlugin({
             test: /one-module\.js$/
           })
@@ -203,6 +219,7 @@ describe('HotAcceptPlugin', () => {
 
   it('modifies index.js by string', done => {
     testPlugin(
+      webpack,
       {
         mode: 'development',
         entry: path.join(__dirname, 'fixtures/index.js'),
@@ -211,7 +228,7 @@ describe('HotAcceptPlugin', () => {
           filename: OUTPUT_BUNDLE
         },
         plugins: [
-          new HotModuleReplacementPlugin(),
+          new webpack.HotModuleReplacementPlugin(),
           new HotAcceptPlugin({
             test: 'index.js'
           })
@@ -247,6 +264,7 @@ describe('HotAcceptPlugin', () => {
 
   it('modifies all modules', done => {
     testPlugin(
+      webpack,
       {
         mode: 'development',
         entry: path.join(__dirname, 'fixtures/index.js'),
@@ -255,7 +273,7 @@ describe('HotAcceptPlugin', () => {
           filename: OUTPUT_BUNDLE
         },
         plugins: [
-          new HotModuleReplacementPlugin(),
+          new webpack.HotModuleReplacementPlugin(),
           new HotAcceptPlugin({
             test: /.+\.js$/
           })
@@ -291,6 +309,7 @@ describe('HotAcceptPlugin', () => {
 
   it('modifies one-module.js file by regexp path', done => {
     testPlugin(
+      webpack,
       {
         mode: 'development',
         entry: path.join(__dirname, 'fixtures/index.js'),
@@ -299,7 +318,7 @@ describe('HotAcceptPlugin', () => {
           filename: OUTPUT_BUNDLE
         },
         plugins: [
-          new HotModuleReplacementPlugin(),
+          new webpack.HotModuleReplacementPlugin(),
           new HotAcceptPlugin({
             test: /fixtures\/one-module\.js$/
           })
@@ -333,6 +352,7 @@ describe('HotAcceptPlugin', () => {
 
   it('modifies multiple files by array as test', done => {
     testPlugin(
+      webpack,
       {
         mode: 'development',
         entry: path.join(__dirname, 'fixtures/index.js'),
@@ -341,7 +361,7 @@ describe('HotAcceptPlugin', () => {
           filename: OUTPUT_BUNDLE
         },
         plugins: [
-          new HotModuleReplacementPlugin(),
+          new webpack.HotModuleReplacementPlugin(),
           new HotAcceptPlugin({
             test: [
               'index.js',
@@ -378,4 +398,12 @@ describe('HotAcceptPlugin', () => {
       [[/if \(true\) { module.hot.accept\(\); }/g, 3]]
     );
   });
+}
+
+describe('HotAcceptPlugin::webpack-v5', () => {
+  runTests(webpackV5);
+});
+
+describe('HotAcceptPlugin::webpack-v4', () => {
+  runTests(webpackV4);
 });
