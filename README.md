@@ -1,6 +1,13 @@
-# hot-accept-webpack-plugin
+[![npm version](https://img.shields.io/npm/v/hot-accept-webpack-plugin.svg)](https://www.npmjs.com/package/hot-accept-webpack-plugin)
+![npm version](https://img.shields.io/npm/dm/hot-accept-webpack-plugin.svg)
+![npm version](https://img.shields.io/npm/dt/hot-accept-webpack-plugin.svg)
+![npm version](https://img.shields.io/snyk/vulnerabilities/npm/hot-accept-webpack-plugin.svg)
+![npm version](https://img.shields.io/librariesio/release/npm/hot-accept-webpack-plugin.svg)
+[![npm version](https://img.shields.io/npm/l/hot-accept-webpack-plugin.svg)](https://github.com/artemirq/hot-accept-webpack-plugin)
 
-Adds HMR accepting code to need modules.
+# [hot-accept-webpack-plugin](https://www.npmjs.com/package/hot-accept-webpack-plugin)
+
+Simple webpack plugin to add HMR accepting code to need modules.
 
 ## Compatibility
 
@@ -14,13 +21,13 @@ Adds HMR accepting code to need modules.
 ### NPM
 
 ```
-npm i -D hot-accept-webpack-plugin@next
+npm i -D hot-accept-webpack-plugin
 ```
 
 ### Yarn
 
 ```
-yarn add -D hot-accept-webpack-plugin@next
+yarn add -D hot-accept-webpack-plugin
 ```
 
 ## Import
@@ -79,7 +86,7 @@ If you want to add `module.hot.accept` only to one specific file, you need decla
 
 #### Example (specific file)
 
-For example, we have following file structure
+For example, we have the following file structure
 
 ```
 src/index.js
