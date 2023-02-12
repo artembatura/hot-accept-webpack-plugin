@@ -3,7 +3,7 @@
 ![npm version](https://img.shields.io/npm/dt/hot-accept-webpack-plugin.svg)
 ![npm version](https://img.shields.io/snyk/vulnerabilities/npm/hot-accept-webpack-plugin.svg)
 ![npm version](https://img.shields.io/librariesio/release/npm/hot-accept-webpack-plugin.svg)
-[![npm version](https://img.shields.io/npm/l/hot-accept-webpack-plugin.svg)](https://github.com/artemirq/hot-accept-webpack-plugin)
+[![npm version](https://img.shields.io/npm/l/hot-accept-webpack-plugin.svg)](https://github.com/artembatura/hot-accept-webpack-plugin)
 
 # [hot-accept-webpack-plugin](https://www.npmjs.com/package/hot-accept-webpack-plugin)
 
@@ -147,4 +147,4 @@ module.exports = {
 };
 ```
 
-This plugin is based on [modify-source-webpack-plugin](https://github.com/artemirq/modify-source-webpack-plugin).
+This plugin is based on [modify-source-webpack-plugin](https://github.com/artembatura/modify-source-webpack-plugin).
